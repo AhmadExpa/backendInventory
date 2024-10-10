@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
@@ -12,6 +13,14 @@ connectDB();
 
 const app = express();
 
+// Middleware
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 // Middleware to parse incoming requests with JSON payloads
 app.use(express.json());
 
