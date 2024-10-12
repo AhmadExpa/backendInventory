@@ -70,10 +70,12 @@ exports.updateProduct = async (req, res) => {
       product.retailPrice = retailPrice || product.retailPrice;
       product.purchasePrice = purchasePrice || product.purchasePrice;
       product.discount = discount || product.discount;
+      product.recentCheckInDate =
+        recentCheckInDate || product.recentCheckInDate;
     }
 
     // Employees can only update specific fields
-    product.recentCheckInDate = recentCheckInDate || product.recentCheckInDate;
+
     product.recentCheckOutDate =
       recentCheckOutDate || product.recentCheckOutDate;
     product.quantity = quantity || product.quantity;
