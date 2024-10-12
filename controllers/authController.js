@@ -15,13 +15,7 @@ exports.registerUser = async (req, res) => {
 
     const user = await User.create({ name, email, password, role });
 
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      token: generateToken(user._id),
-    });
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -67,7 +61,6 @@ const generateToken = (id, role, name, email) => {
 // verifyToken
 exports.getUserDetails = (req, res) => {
   const token = req.body.authorization; // Assuming the token is passed in the Authorization 
-  console.log(token);
   if (!token) {
     returnres.status(401).json({ message: "Authentication failed!" });
   }

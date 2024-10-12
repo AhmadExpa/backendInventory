@@ -37,7 +37,7 @@ exports.createProduct = async (req, res) => {
     });
 
     await newProduct.save(); // Corrected to save the new product
-    res.status(201).json(newProduct);
+    res.status(201).json({ message: "Product Created Successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -84,11 +84,7 @@ exports.updateProduct = async (req, res) => {
     // updatedAt is automatically handled by the model schema
 
     await product.save();
-    res.status(200).json({
-      id: product._id, // or other fields you want to return
-      updatedAt: product.updatedAt, // return only the latest update timestamp
-      updatedBy: product.updatedBy, // return the user ID who last updated
-    });
+    res.status(200).json({ message: "Product updated successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
