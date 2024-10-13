@@ -44,8 +44,9 @@ exports.createProduct = async (req, res) => {
 };
 
 // Update product (employees can only modify certain fields, admin can modify all)
+// Update product (employees can only modify certain fields, admin can modify all)
 exports.updateProduct = async (req, res) => {
-  const { role } = req.user; // `authMiddleware` passes role from token
+  const { role } = req.user;
   const {
     productName,
     retailPrice,
@@ -75,13 +76,15 @@ exports.updateProduct = async (req, res) => {
     }
 
     // Employees can only update specific fields
-
     product.recentCheckOutDate =
       recentCheckOutDate || product.recentCheckOutDate;
-    product.quantity = quantity || product.quantity;
-    product.freePieces = freePieces || product.freePieces;
-    product.updatedBy = req.user._id; // Set the user who updated
-    // updatedAt is automatically handled by the model schema
+
+    // Fix for the quantity issue
+    product.quantity = quantity !== undefined ? quantity : product.quantity;
+    product.freePieces =
+      freePieces !== undefined ? freePieces : product.freePieces;
+
+    product.updatedBy = req.user._id;
 
     await product.save();
     res.status(200).json({ message: "Product updated successfully" });
