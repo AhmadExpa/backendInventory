@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
   recentCheckOutDate: { type: Date, required: true },
   quantity: { type: Number, required: true },
   freePieces: { type: Number, required: true },
+  piece: { type: Number, required: true },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   updatedAt: { type: Date, default: Date.now }, // New field for updated timestamp
