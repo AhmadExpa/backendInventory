@@ -19,6 +19,7 @@ exports.createProduct = async (req, res) => {
     discount,
     recentCheckInDate,
     recentCheckOutDate,
+    piece,
     quantity,
     freePieces,
   } = req.body;
@@ -33,6 +34,7 @@ exports.createProduct = async (req, res) => {
       recentCheckOutDate,
       quantity,
       freePieces,
+      piece,
       createdBy: req.user._id,
     });
 
@@ -55,6 +57,7 @@ exports.updateProduct = async (req, res) => {
     recentCheckInDate,
     recentCheckOutDate,
     quantity,
+    piece,
     freePieces,
   } = req.body;
 
@@ -73,6 +76,7 @@ exports.updateProduct = async (req, res) => {
       product.discount = discount || product.discount;
       product.recentCheckInDate =
         recentCheckInDate || product.recentCheckInDate;
+      product.piece = piece || product.piece;
     }
 
     // Employees can only update specific fields
